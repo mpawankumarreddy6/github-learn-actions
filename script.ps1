@@ -1,4 +1,4 @@
-﻿param(    [string]$RelativePath = "D:\New folder") 
+﻿param(    [string]$RelativePath) 
 $jsonfiles = Get-ChildItem -Path $RelativePath -Filter *.json -Recurse
 foreach($file in $jsonfiles)
 { $newContent = Invoke-WebRequest $file.FullName | ConvertFrom-Json    

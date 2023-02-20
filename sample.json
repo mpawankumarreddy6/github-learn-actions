@@ -1,0 +1,24 @@
+{
+    "$schema": "../manifestSchema.json",
+    "name": "CSC_PriceCheckView",
+    "publisher": "Microsoft",
+    "version": "7.2.0",
+    "minimumPosVersion": "7.2.0.0",
+    "components": {
+        "extend": {
+          "views": {            
+            "PriceCheckView": {
+              "controlsConfig": {
+                "customControls": [
+                  {
+                    "controlName": "priceCheckPanel",
+                    "htmlPath": "ViewExtensions/PriceCheck/PriceCheckCustomControlPanel.html",
+                    "modulePath": "ViewExtensions/PriceCheck/PriceCheckCustomControlPanel"
+                  }
+                ]
+              }
+            }
+          }
+        }
+    }
+}

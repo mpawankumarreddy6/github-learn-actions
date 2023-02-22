@@ -1,5 +1,4 @@
-﻿param(    [string]$RelativePath) 
-$jsonfiles = Get-ChildItem -Path $RelativePath -Filter *.json -Recurse
+$jsonfiles = Get-ChildItem -Path ./github-learn-action -Filter *.json -Recurse
 foreach($file in $jsonfiles)
 { $newContent = Invoke-WebRequest $file.FullName | ConvertFrom-Json    
      $oldBuildNumber = $newContent.version    

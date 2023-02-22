@@ -1,6 +1,8 @@
 $jsonfiles = Get-ChildItem -Path ./github-learn-action -Filter *.json -Recurse
 foreach($file in $jsonfiles)
-{ $newContent = Invoke-WebRequest $file.FullName | ConvertFrom-Json    
+{ 
+     write-host $file.FullName
+     $newContent = Invoke-WebRequest $file.FullName | ConvertFrom-Json    
      $oldBuildNumber = $newContent.version    
      $MajorVersion = $oldBuildNumber.split('.')[0]    
      $MinorVersion = $oldBuildNumber.split('.')[1]    

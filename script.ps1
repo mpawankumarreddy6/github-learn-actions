@@ -1,4 +1,4 @@
-$jsonfiles = Get-ChildItem -Path ./github-learn-action -Filter *.json -Recurse
+$jsonfiles = Get-ChildItem -Path ./github-learn-actions -Filter *.json -Recurse
 foreach($file in $jsonfiles)
 { 
      write-host $file.FullName

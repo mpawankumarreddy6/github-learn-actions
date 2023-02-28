@@ -8,5 +8,6 @@ jobs:
       steps:
         - uses: actions/checkout@v1
         - name: Script
-          run: ./script.ps1
           shell: pwsh
+          run: ./script.ps1
+          

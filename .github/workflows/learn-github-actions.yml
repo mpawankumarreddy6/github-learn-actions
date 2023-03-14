@@ -1,13 +1,25 @@
-name: CI
-on: [push, pull_request]
+name: PowerShell Script Trigger
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 
 jobs:
-    build:
-      name: Run Script
-      runs-on: windows-latest
-      steps:
-        - uses: actions/checkout@v1
-        - name: Script
-          shell: pwsh
-          run: ./script.ps1
+  run-powershell:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+          
+    - name: Run PowerShell script
+      shell: pwsh
+      run: |
+        ./script.ps1
+      env:
+        RelativePath: .\src
+ 
           

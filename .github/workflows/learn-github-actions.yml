@@ -1,50 +1,25 @@
-name: Update JSON file
+name: PowerShell Script Trigger
+	
 
-on:
-  push:
-    branches:
-      - main
+	on:
+	  pull_request:
+	    branches:
+	      - main
+	  push:
+	    branches:
+	      - main
+	
 
-jobs:
-  update_json:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Update JSON file
-        run: |
-          $repoPath = "$env:GITHUB_WORKSPACE"
-          echo $repoPath
-          $jsonPath = Join-Path $repoPath "\manifest.json"
-
-          # Load the JSON file
-          $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
-
-          $versionParts = $json.version -split '\.'
-
-          # Increment the last component of the version number
-          $versionParts[-1] = [int]$versionParts[-1] + 1
-
-          # Combine the version components into a string
-          $newVersion = $versionParts -join '.'
-
-          echo $newVersion
-
-          # Update the version number in the JSON object
-          $json.version = $newVersion
-
-          echo "New " + $json.version
-
-          # Save the updated JSON object back to the file
-          $json | ConvertTo-Json -Depth 100 | Set-Content $jsonPath
-
-          # Configure Git user info
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
-
-          # Add, commit, and push the changes
-          git add $jsonPath
-          git commit -m "Update JSON file"
-          git push origin main
+	jobs:
+	  run-powershell:
+	    runs-on: windows-latest
+	    
+	    steps:
+	    - uses: actions/checkout@v2
+	          
+	    - name: Run PowerShell script
+	      shell: pwsh
+	      run: |
+	        ./script.ps1
+	      env:
+	        RelativePath: .\src

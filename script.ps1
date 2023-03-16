@@ -36,6 +36,17 @@ if ($content -ne $null)
     $json -replace $json.version | Out-File $filePath
     $json | ConvertTo-Json | Out-File $filePath
     echo "done with replacing"
+    
+    $jsonBase = @{}
+
+    $array = @{}
+
+    $data = @{"Name"="Matt";"Colour"="Black";}
+
+    $array.Add("Person",$data)
+
+    $jsonBase.Add("Data",$array)
+    $jsonBase | ConvertTo-Json -Depth 10 | Out-File ".\write-array.json"
 } 
 else 
 {

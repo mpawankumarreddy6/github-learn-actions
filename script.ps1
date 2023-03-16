@@ -5,7 +5,7 @@ if ($content -ne $null)
 {
     echo "inside"
 
-    $json = Get-Content $file -Raw | ConvertFrom-Json
+    $json = Get-Content $filePath -Raw | ConvertFrom-Json
     
     # Extract the current version number and split it into its components
     $versionParts = $json.version -split '\.'

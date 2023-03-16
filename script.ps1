@@ -31,7 +31,7 @@ if ($content -ne $null)
     echo "New " + $json.version
 
     # Save the updated JSON object back to the new file
-    $json | ConvertTo-Json -Depth 100 | Out-File $filePath1
+    $json | ConvertTo-Json -Depth 30 | Out-File $filePath1
 } 
 else 
 {

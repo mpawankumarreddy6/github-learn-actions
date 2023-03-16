@@ -34,7 +34,7 @@ if ($content -ne $null)
     $json | ConvertTo-Json -Depth 30 | Out-File $filePath
     
     $json -replace $json.version | Out-File $filePath
-    
+    $json | ConvertTo-Json | Out-File $filePath
     echo "done with replacing"
 } 
 else 

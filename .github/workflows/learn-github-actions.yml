@@ -1,37 +1,37 @@
-name: PowerShell Script Trigger
+name: Update JSON file
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
 
 jobs:
-  update:
+  update_json:
     runs-on: windows-latest
-    
+
     steps:
-    - uses: actions/checkout@v2
-          
-    - name: Install PowerShell
-      uses: microsoft/setup-powershell@v1
-      
-    - name: Update JSON file
-      run: |
-        $jsonPath = "github-learn-actions/manifest.json"
-        $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
-        $versionParts = $json.version -split '\.'
-        $versionParts[-1] = [int]$versionParts[-1] + 1
-        $newVersion = $versionParts -join '.'
-        $json.version = $newVersion
-       
-        $json | ConvertTo-Json -Depth 20 | Set-Content $jsonPath
-        git config --global user.email "mpawankumarreddy6@gmail.com.com"
-        git config --global user.name "Pawan"
-        git add $jsonPath
-        git commit -m "Update JSON file"
-        git push origin main
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Update JSON file
+        run: |
+          $repoPath = "$env:GITHUB_WORKSPACE"
+          $jsonPath = Join-Path $repoPath "path\to\json\manifest.json"
+
+          # Load the JSON file
+          $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
+
+          # Update the property value
+          $json.property = "new value"
+
+          # Save the updated JSON object back to the file
+          $json | ConvertTo-Json -Depth 4 | Set-Content $jsonPath
+
+          # Configure Git user info
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+
+          # Add, commit, and push the changes
+          git add $jsonPath
+          git commit -m "Update JSON file"
+          git push origin main

@@ -1,5 +1,6 @@
 $repoPath = "$env:GITHUB_WORKSPACE"
 $filePath = "$repoPath\manifest.json"
+$filePath1 = "$repoPath\manifest1.json"
 $content = Get-Content $filePath
 if ($content -ne $null)
 {
@@ -24,7 +25,7 @@ if ($content -ne $null)
     echo "New " + $json.version
 
     # Save the updated JSON object back to the file
-    $json | ConvertTo-Json -Depth 100 | Set-Content $filePath
+    $json | ConvertTo-Json -Depth 100 | Set-Content $filePath1
 } 
 else 
 {

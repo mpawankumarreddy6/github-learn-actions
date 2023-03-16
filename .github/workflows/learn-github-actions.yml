@@ -22,11 +22,23 @@ jobs:
           # Load the JSON file
           $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
 
-          # Update the property value
-          $json.property = "new value"
+          $versionParts = $json.version -split '\.'
+
+          # Increment the last component of the version number
+          $versionParts[-1] = [int]$versionParts[-1] + 1
+
+          # Combine the version components into a string
+          $newVersion = $versionParts -join '.'
+
+          echo $newVersion
+
+          # Update the version number in the JSON object
+          $json.version = $newVersion
+
+          echo "New " + $json.version
 
           # Save the updated JSON object back to the file
-          $json | ConvertTo-Json -Depth 4 | Set-Content $jsonPath
+          $json | ConvertTo-Json -Depth 100 | Set-Content $jsonPath
 
           # Configure Git user info
           git config --global user.email "you@example.com"

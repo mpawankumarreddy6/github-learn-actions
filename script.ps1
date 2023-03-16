@@ -9,11 +9,11 @@ if ($content -ne $null)
     $json = Get-Content $filePath -Raw | ConvertFrom-Json
 
     $json | Get-Member
-    
+    echo "got Member"
     Test-Path $filePath
-    
+    echo "Checked test-path"
     (Get-Acl $filePath).Access
-    
+    echo "Checked filepath access rights"
     # Extract the current version number and split it into its components
     $versionParts = $json.version -split '\.'
 

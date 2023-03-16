@@ -16,7 +16,7 @@ jobs:
       - name: Update JSON file
         run: |
           $repoPath = "$env:GITHUB_WORKSPACE"
-          $jsonPath = Join-Path $repoPath "path\to\json\manifest.json"
+          $jsonPath = Join-Path $repoPath "\manifest.json"
 
           # Load the JSON file
           $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
